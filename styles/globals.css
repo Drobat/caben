@@ -1,0 +1,15 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles/globals.css */
+a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #555555;
+  }
+  
