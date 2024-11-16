@@ -12,4 +12,12 @@ a {
   a:hover {
     color: #555555;
   }
+  body {
+    background-image: url('/bg.jpg');
+    background-size: cover; /* Remplit tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Pas de répétition */
+    height: 100vh; /* Assurez-vous que la hauteur prend tout l'écran */
+    margin: 0; /* Supprime les marges par défaut */
+  }
   

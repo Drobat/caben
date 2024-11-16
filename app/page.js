@@ -1,12 +1,9 @@
-// app/page.js
-import Header from './components/Header';
-import MainContent from './components/MainContent';
+import HomePage from './components/HomePage';
 
-export default function HomePage() {
+export default function Page() {
   return (
-    <div>
-      
-      {/* <MainContent /> */}
-    </div>
+    <main>
+      <HomePage />
+    </main>
   );
 }
