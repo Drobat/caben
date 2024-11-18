@@ -21,8 +21,12 @@ export default function HomePage() {
   href="/courses"
   className="
     mt-8 
+    w-64
     bg-[#F7CE3E] 
     text-black 
+    text-center
+    border-4
+  border-black 
     px-6 py-3 
     rounded-full 
     font-bold 
@@ -39,7 +43,7 @@ export default function HomePage() {
     inline-block
   "
 >
-  Accéder aux cours
+START LEARNING
 </Link>
 
       </div>

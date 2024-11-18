@@ -20,7 +20,7 @@ const NavBar = () => {
                     <Link href="/" className="text-black text-xl hover:text-gray-700">Home</Link>
                     <Link href="/courses" className="text-black text-xl hover:text-gray-700">Courses</Link>
                     <Link href="/about" className="text-black text-xl hover:text-gray-700">About Us</Link>
-                    <Link href="/signin" className="text-black text-xl hover:text-gray-700">Access Account</Link>
+                    <Link href="/signin" className="text-black text-xl hover:text-gray-700">Account</Link>
                 </div>
 
                 {/* Hamburger Menu */}
@@ -46,7 +46,7 @@ const NavBar = () => {
                             <Link href="/about" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">About Us</Link>
                         </li>
                         <li>
-                            <Link href="/signin" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">Access Account</Link>
+                            <Link href="/signin" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">Account</Link>
                         </li>
                     </ul>
                 </div>

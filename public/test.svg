@@ -1,0 +1,27 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc"/>
+  
+  <!-- Stack of books -->
+  <rect x="100" y="150" width="200" height="30" fill="#2563eb" rx="2"/>
+  <rect x="110" y="130" width="200" height="30" fill="#f59e0b" rx="2"/>
+  <rect x="90" y="170" width="200" height="30" fill="#dc2626" rx="2"/>
+  
+  <!-- English text elements -->
+  <text x="200" y="80" font-family="Arial" font-size="40" font-weight="bold" text-anchor="middle" fill="#1e293b">ABC</text>
+  
+  <!-- Graduation cap -->
+  <path d="M160 40 L240 40 L200 20 Z" fill="#334155"/>
+  <rect x="190" y="40" width="20" height="10" fill="#334155"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" y="100" r="10" fill="#f59e0b"/>
+  <circle cx="250" y="100" r="10" fill="#2563eb"/>
+  
+  <!-- Book pages -->
+  <path d="M310 130 C320 135, 320 155, 310 160" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M90 170 C80 175, 80 195, 90 200" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  
+  <!-- Learning elements -->
+  <text x="200" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#475569">LEARN ENGLISH</text>
+</svg>
