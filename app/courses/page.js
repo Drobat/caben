@@ -1,5 +1,5 @@
 // app/courses/page.js
-import CourseCard from '../components/CourseCard';
+import CourseCard from '../../components/CourseCard';
 
 export default function CoursesPage() {
   return (

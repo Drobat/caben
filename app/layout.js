@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import NavBar from './components/NavBar';  // Importer la NavBar
+import NavBar from '../components/NavBar';  // Importer la NavBar
 
 export const metadata = {
   title: "CABEN", // Définir un titre par défaut
