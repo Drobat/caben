@@ -1,24 +1,21 @@
-/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* styles/globals.css */
-a {
-    color: black;
-    text-decoration: none;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
-  
-  a:hover {
-    color: #555555;
-  }
-  .home-page {
-    background-image: url('/bg.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  /* Autres pages sans background */
-  body {
-    background: var(--background);
-  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}

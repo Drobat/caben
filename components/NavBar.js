@@ -1,10 +1,13 @@
+// components/NavBar.js
 "use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { data: session, status } = useSession();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -20,7 +23,25 @@ const NavBar = () => {
                     <Link href="/" className="text-black text-xl hover:text-gray-700">Home</Link>
                     <Link href="/courses" className="text-black text-xl hover:text-gray-700">Courses</Link>
                     <Link href="/about" className="text-black text-xl hover:text-gray-700">About Us</Link>
-                    <Link href="/signin" className="text-black text-xl hover:text-gray-700">Account</Link>
+                    {status === 'loading' ? (
+                        <span className="text-black text-xl">...</span>
+                    ) : session ? (
+                        <>
+                            <Link href="/account" className="text-black text-xl hover:text-gray-700">
+                                Mon Compte
+                            </Link>
+                            <button
+                                onClick={() => signOut()}
+                                className="text-black text-xl hover:text-gray-700"
+                            >
+                                Déconnexion
+                            </button>
+                        </>
+                    ) : (
+                        <Link href="/account" className="text-black text-xl hover:text-gray-700">
+                            Account
+                        </Link>
+                    )}
                 </div>
 
                 {/* Hamburger Menu */}
@@ -45,9 +66,36 @@ const NavBar = () => {
                         <li>
                             <Link href="/about" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">About Us</Link>
                         </li>
-                        <li>
-                            <Link href="/signin" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">Account</Link>
-                        </li>
+                        {status === 'loading' ? (
+                            <li>
+                                <span className="text-black">...</span>
+                            </li>
+                        ) : session ? (
+                            <>
+                                <li>
+                                    <Link href="/account" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">
+                                        Mon Compte
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={() => {
+                                            signOut();
+                                            setIsOpen(false);
+                                        }}
+                                        className="text-black hover:text-gray-700"
+                                    >
+                                        Déconnexion
+                                    </button>
+                                </li>
+                            </>
+                        ) : (
+                            <li>
+                                <Link href="/account" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">
+                                    Account
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             )}

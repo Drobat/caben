@@ -1,8 +1,10 @@
+// app/layout.js
 import '../styles/globals.css';
-import NavBar from '../components/NavBar';  // Importer la NavBar
+import NavBar from '../components/NavBar';
+import { AuthProvider } from './auth/providers/auth-provider';
 
 export const metadata = {
-  title: "CABEN", // Définir un titre par défaut
+  title: "CABEN",
   icons: {
     icon: [
       { rel: "icon", url: "/favicon-16x16.png", sizes: "16x16" },
@@ -17,12 +19,14 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> {/* Optionnel pour iOS */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <title>CABEN</title>
       </head>
       <body>
-        <NavBar />
-        <div className="min-h-screen">{children}</div>
+        <AuthProvider>
+          <NavBar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
