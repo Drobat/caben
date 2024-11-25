@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <title>CABEN</title>
       </head>
-      <body>
+      <body className="bg-[#1D232A]">
         <AuthProvider>
           <NavBar />
           {children}
