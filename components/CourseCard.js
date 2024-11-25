@@ -1,4 +1,6 @@
+// app/components/CourseCard.js
 'use client';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from './ui/Button';
@@ -12,16 +14,23 @@ export default function CourseCard() {
     try {
       setError('');
       setLoading(true);
+      
       const result = await createCheckoutSession();
       
-      if (result?.url) {
-        window.location.href = result.url;
-      } else {
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      
+      if (!result?.url) {
         throw new Error('URL de paiement non disponible');
       }
+
+      window.location.href = result.url;
+      
     } catch (error) {
       console.error('Payment error:', error);
       setError(error.message || 'Une erreur est survenue. Veuillez réessayer.');
+    } finally {
       setLoading(false);
     }
   };
@@ -53,7 +62,8 @@ export default function CourseCard() {
 
         <Button
           onClick={handleEnrollClick}
-          loading={loading}
+          disabled={loading}
+          className="w-full"
         >
           {loading ? 'Processing...' : 'ENROLL NOW'}
         </Button>
