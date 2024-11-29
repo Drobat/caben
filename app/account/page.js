@@ -17,18 +17,27 @@ export default function AccountPage() {
     setError('');
 
     try {
+      // On envoie la demande de connexion avec callbackUrl pour la redirection après vérification
       const result = await signIn('email', {
         email,
         redirect: false,
+        callbackUrl: '/dashboard', // Page où rediriger après connexion réussie
       });
 
-      if (result?.error) {
-        setError('Ce compte n\'existe pas. Contactez-nous pour accéder à nos services.');
+      if (!result?.ok) {
+        // Vérifions plus précisément la nature de l'erreur
+        if (result?.error === 'Email not found') {
+          setError('Ce compte n\'existe pas. Contactez-nous pour accéder à nos services.');
+        } else {
+          setError('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
+        }
       } else {
+        // Si tout va bien, on redirige vers la page de vérification
         router.push('/account/verify');
       }
     } catch (error) {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      console.error('Erreur de connexion:', error);
+      setError('Une erreur inattendue est survenue. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
