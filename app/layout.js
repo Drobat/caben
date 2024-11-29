@@ -1,7 +1,7 @@
 // app/layout.js
-import './styles/globals.css';
-import NavBar from './components/NavBar';
-import { AuthProvider } from './components/providers/AuthProvider';
+import '../styles/globals.css';           // Notez le changement de './' à '../'
+import NavBar from '../components/NavBar.js';  // Ajout de l'extension .js et changement du chemin
+import { AuthProvider } from '../components/providers/AuthProvider.js';  // Chemin complet avec extension
 
 export const metadata = {
   title: "CABEN",
