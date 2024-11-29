@@ -9,21 +9,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
-  secret: process.env.NEXTAUTH_SECRET, // Ajoutez cette ligne
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
-      },
       from: process.env.EMAIL_FROM || 'CABEN <onboarding@resend.dev>',
       async sendVerificationRequest({ identifier: email, url }) {
         try {
-          // Vérifie si l'utilisateur existe
           const user = await prisma.user.findUnique({
             where: { email }
           });
@@ -32,7 +23,7 @@ export const authOptions = {
             throw new Error('Ce compte n\'existe pas');
           }
           
-          const { data, error } = await resend.emails.send({
+          const { error } = await resend.emails.send({
             from: process.env.EMAIL_FROM || 'CABEN <onboarding@resend.dev>',
             to: email,
             subject: 'Se connecter à CABEN',
@@ -58,7 +49,7 @@ export const authOptions = {
               </div>
             `
           });
-
+          
           if (error) {
             throw error;
           }
@@ -81,6 +72,15 @@ export const authOptions = {
         return false;
       }
     },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.sub;
+      }
+      return session;
+    }
+  },
+  session: {
+    strategy: "jwt"
   },
   pages: {
     signIn: '/account',
@@ -90,3 +90,11 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+
+// app/providers.js
+'use client'
+import { SessionProvider } from 'next-auth/react'
+
+export function AuthProvider({ children }) {
+  return <SessionProvider>{children}</SessionProvider>
+}
