@@ -1,7 +1,7 @@
 // app/layout.js
-import '../styles/globals.css';
-import NavBar from '../components/NavBar';
-import { AuthProvider } from './auth/providers/auth-provider';
+import './styles/globals.css';
+import NavBar from './components/NavBar';
+import { AuthProvider } from './components/providers/AuthProvider';
 
 export const metadata = {
   title: "CABEN",
