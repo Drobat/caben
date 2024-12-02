@@ -54,8 +54,8 @@ If the issue persists, please contact our support team at contact@caben.com`);
 
   return (
     <div className="w-full max-w-md bg-white rounded-lg p-8">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Accéder à mon compte
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      Log in to my account
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -73,7 +73,7 @@ If the issue persists, please contact our support team at contact@caben.com`);
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 bg-gray-100 border border-gray-300 rounded-md text-gray-900"
-            placeholder="votre@email.com"
+            placeholder="your@email.com"
           />
         </div>
 
