@@ -8,6 +8,11 @@ import { useSession, signOut } from 'next-auth/react';
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session, status } = useSession();
+    
+    // Créer un message de bienvenue personnalisé
+    const welcomeMessage = session?.user?.name 
+        ? `Hi, ${session.user.name}!` 
+        : "Hi!";
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -28,7 +33,7 @@ const NavBar = () => {
                     ) : session ? (
                         <>
                             <Link href="/account" className="text-black text-xl hover:text-gray-700">
-                                Mon Compte
+                                {welcomeMessage}
                             </Link>
                             <button
                                 onClick={() => signOut()}
@@ -74,7 +79,7 @@ const NavBar = () => {
                             <>
                                 <li>
                                     <Link href="/account" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">
-                                        Mon Compte
+                                        {welcomeMessage}
                                     </Link>
                                 </li>
                                 <li>
