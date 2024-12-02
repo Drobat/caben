@@ -8,12 +8,9 @@ import { useSession, signOut } from 'next-auth/react';
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session, status } = useSession();
-    
-    // Créer un message de bienvenue personnalisé
     const welcomeMessage = session?.user?.name 
-        ? `Hi, ${session.user.name}!` 
-        : "Hi!";
-
+    ? `Hi, ${session.user.name}!` 
+    : "Hi!";
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -33,10 +30,17 @@ const NavBar = () => {
                     ) : session ? (
                         <>
                             <Link href="/account" className="text-black text-xl hover:text-gray-700">
-                                {welcomeMessage}
+                                Mon Compte
                             </Link>
                             <button
-                                onClick={() => signOut()}
+                                onClick={() => {
+                                    console.log("Déconnexion demandée");
+                                    signOut().then(() => {
+                                        console.log("Déconnexion réussie");
+                                    }).catch((error) => {
+                                        console.error("Erreur lors de la déconnexion:", error);
+                                    });
+                                }}
                                 className="text-black text-xl hover:text-gray-700"
                             >
                                 Déconnexion
@@ -79,14 +83,18 @@ const NavBar = () => {
                             <>
                                 <li>
                                     <Link href="/account" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">
-                                        {welcomeMessage}
+                                        Mon Compte
                                     </Link>
                                 </li>
                                 <li>
                                     <button
                                         onClick={() => {
-                                            signOut();
-                                            setIsOpen(false);
+                                            console.log("Déconnexion demandée");
+                                            signOut().then(() => {
+                                                console.log("Déconnexion réussie");
+                                            }).catch((error) => {
+                                                console.error("Erreur lors de la déconnexion:", error);
+                                            });
                                         }}
                                         className="text-black hover:text-gray-700"
                                     >

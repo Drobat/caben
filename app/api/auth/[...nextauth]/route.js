@@ -64,31 +64,47 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      try {
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email },
-        });
-        if (!existingUser) {
-          throw new Error('Email not found');
-        }
-        return true;
-      } catch (error) {
-        console.error('Erreur de vérification:', error);
-        return false;
-      }
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("SignIn callback:", { 
+        user,
+        account,
+        profile,
+        email,
+        credentials 
+      });
+      return true;
     },
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.sub;
+    async session({ session, token, user }) {
+      console.log("Session callback:", { 
+        session,
+        token,
+        user 
+      });
+      if (session?.user) {
+        session.user.id = user?.id || token?.sub;
       }
       return session;
+    },
+    async jwt({ token, user, account, profile }) {
+      console.log("JWT callback:", { 
+        token,
+        user,
+        account,
+        profile 
+      });
+      return token;
     }
   },
   pages: {
     signIn: '/account',
     verifyRequest: '/account/verify',
   },
+  events: {
+    async signIn(message) { console.log("Successful sign in", message) },
+    async signOut(message) { console.log("Sign out", message) },
+    async session(message) { console.log("Session", message) },
+  },
+  debug: true, // Active les logs de debug de NextAuth
 };
 
 const handler = NextAuth(authOptions);
