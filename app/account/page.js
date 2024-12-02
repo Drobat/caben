@@ -3,13 +3,24 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function AccountPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      // Rediriger vers la page d'accueil au lieu de dashboard
+      router.push('/');
+    }
+  }, [status, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,22 +28,19 @@ export default function AccountPage() {
     setError('');
 
     try {
-      // On envoie la demande de connexion avec callbackUrl pour la redirection après vérification
       const result = await signIn('email', {
         email,
         redirect: false,
-        callbackUrl: '/dashboard', // Page où rediriger après connexion réussie
+        callbackUrl: '/'
       });
 
       if (!result?.ok) {
-        // Vérifions plus précisément la nature de l'erreur
         if (result?.error === 'Email not found') {
           setError('Ce compte n\'existe pas. Contactez-nous pour accéder à nos services.');
         } else {
           setError('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
         }
       } else {
-        // Si tout va bien, on redirige vers la page de vérification
         router.push('/account/verify');
       }
     } catch (error) {

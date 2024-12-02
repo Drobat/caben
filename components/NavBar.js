@@ -9,8 +9,8 @@ const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session, status } = useSession();
     const welcomeMessage = session?.user?.name 
-    ? `Hi, ${session.user.name}!` 
-    : "Hi!";
+        ? `Hi, ${session.user.name}!` 
+        : "Hi!";
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -26,24 +26,17 @@ const NavBar = () => {
                     <Link href="/courses" className="text-black text-xl hover:text-gray-700">Courses</Link>
                     <Link href="/about" className="text-black text-xl hover:text-gray-700">About Us</Link>
                     {status === 'loading' ? (
-                        <span className="text-black text-xl">...</span>
+                        <span className="text-black text-xl">Account</span>
                     ) : session ? (
                         <>
                             <Link href="/account" className="text-black text-xl hover:text-gray-700">
-                                Mon Compte
+                                {welcomeMessage}
                             </Link>
                             <button
-                                onClick={() => {
-                                    console.log("Déconnexion demandée");
-                                    signOut().then(() => {
-                                        console.log("Déconnexion réussie");
-                                    }).catch((error) => {
-                                        console.error("Erreur lors de la déconnexion:", error);
-                                    });
-                                }}
+                                onClick={() => signOut()}
                                 className="text-black text-xl hover:text-gray-700"
                             >
-                                Déconnexion
+                                Sign Out
                             </button>
                         </>
                     ) : (
@@ -77,28 +70,21 @@ const NavBar = () => {
                         </li>
                         {status === 'loading' ? (
                             <li>
-                                <span className="text-black">...</span>
+                                <span className="text-black">Account</span>
                             </li>
                         ) : session ? (
                             <>
                                 <li>
                                     <Link href="/account" onClick={() => setIsOpen(false)} className="text-black hover:text-gray-700">
-                                        Mon Compte
+                                        {welcomeMessage}
                                     </Link>
                                 </li>
                                 <li>
                                     <button
-                                        onClick={() => {
-                                            console.log("Déconnexion demandée");
-                                            signOut().then(() => {
-                                                console.log("Déconnexion réussie");
-                                            }).catch((error) => {
-                                                console.error("Erreur lors de la déconnexion:", error);
-                                            });
-                                        }}
+                                        onClick={() => signOut()}
                                         className="text-black hover:text-gray-700"
                                     >
-                                        Déconnexion
+                                        Sign Out
                                     </button>
                                 </li>
                             </>
