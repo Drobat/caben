@@ -17,7 +17,6 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      // Rediriger vers la page d'accueil au lieu de dashboard
       router.push('/');
     }
   }, [status, router]);
@@ -34,13 +33,16 @@ export default function AccountPage() {
         callbackUrl: '/'
       });
 
-      if (!result?.ok) {
-        if (result?.error === 'Email not found') {
-          setError('Ce compte n\'existe pas. Contactez-nous pour accéder à nos services.');
-        } else {
-          setError('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
-        }
-      } else {
+      if (result?.error) {
+        setError(
+          "No account is associated with this email address. " +
+          "To log in, please use the email address that was used to purchase your course. " +
+          "If the issue persists, please contact our support team at contact@caben.com"
+        );
+        return;
+      }
+
+      if (result?.ok) {
         router.push('/account/verify');
       }
     } catch (error) {
