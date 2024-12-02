@@ -1,7 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from '@/app/i18n/hooks/useTranslation';
 
 export default function HomePage() {
+  const { t } = useTranslation();
+
   return (
     <div 
       className="home-page h-screen bg-cover bg-center"
@@ -42,7 +47,7 @@ export default function HomePage() {
             inline-block
           "
         >
-          START LEARNING
+          {t('home.startLearning')}
         </Link>
       </div>
     </div>

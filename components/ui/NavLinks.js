@@ -6,19 +6,26 @@ import Link from 'next/link';
  * @param {boolean} isMobile - Indique si le composant est affiché en version mobile
  * @param {Function} onItemClick - Fonction appelée lors du clic sur un lien (utile pour fermer le menu mobile)
  */
-export const NavLinks = ({ isMobile = false, onItemClick = () => {}, className = '', linkClassName = '' }) => {
-  const baseClasses = `text-black ${isMobile ? 'block w-full' : 'text-xl'} hover:text-gray-700 ${linkClassName}`;
+export const NavLinks = ({ isMobile = false, onItemClick = () => {}, t }) => {
+  const baseClasses = `
+    text-black 
+    ${isMobile ? 'text-xl text-center w-full py-2' : 'text-xl'} 
+    hover:text-gray-700
+    transition-colors
+  `;
   
   return (
-    <div className={`${className} ${isMobile ? '' : 'flex space-x-4'}`}>
+    <div className={`
+      ${isMobile ? 'flex flex-col space-y-4 w-full items-center' : 'flex space-x-4'}
+    `}>
       <Link href="/" onClick={onItemClick} className={baseClasses}>
-        Home
+        {t('nav.home')}
       </Link>
       <Link href="/courses" onClick={onItemClick} className={baseClasses}>
-        Courses
+        {t('nav.courses')}
       </Link>
       <Link href="/about" onClick={onItemClick} className={baseClasses}>
-        About Us
+        {t('nav.about')}
       </Link>
     </div>
   );

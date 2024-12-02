@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getSession } from '@/lib/actions/getSession';
+import { useTranslation } from '@/app/i18n/hooks/useTranslation';
 
 export default function SuccessContent() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [paymentDetails, setPaymentDetails] = useState(null);
@@ -50,22 +52,22 @@ export default function SuccessContent() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold mb-4">Paiement réussi !</h1>
+        <h1 className="text-3xl font-bold mb-4">{t('success.title')}</h1>
 
         {paymentDetails && (
           <div className="mb-8 text-left bg-gray-800 p-6 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">Détails du paiement</h2>
+            <h2 className="text-xl font-bold mb-4">{t('success.paymentDetails')}</h2>
             <div className="space-y-3">
               <p className="text-gray-300">
-                <span className="font-semibold">Email:</span>{' '}
+                <span className="font-semibold">{t('success.email')}:</span>{' '}
                 {paymentDetails.email}
               </p>
               <p className="text-gray-300">
-                <span className="font-semibold">Montant payé:</span>{' '}
+                <span className="font-semibold">{t('success.amountPaid')}:</span>{' '}
                 €{paymentDetails.amount.toFixed(2)}
               </p>
               <p className="text-gray-300">
-                <span className="font-semibold">Statut:</span>{' '}
+                <span className="font-semibold">{t('success.status')}:</span>{' '}
                 <span className="text-green-500 capitalize">
                   {paymentDetails.status}
                 </span>
@@ -75,8 +77,7 @@ export default function SuccessContent() {
         )}
 
         <p className="text-gray-300 mb-8">
-          Votre accès au cours a été créé.
-          Vous pouvez dès maintenant vous connecter à votre espace.
+          {t('success.accessCreated')}
         </p>
 
         <div className="space-y-4">
@@ -84,14 +85,14 @@ export default function SuccessContent() {
             href="/account"
             className="inline-block bg-[#F7CE3E] text-black px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-duration-300 w-full"
           >
-            Accéder à mon espace
+            {t('success.accessAccount')}
           </Link>
 
           <Link
             href="/courses"
             className="inline-block bg-gray-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-duration-300 w-full"
           >
-            Retour aux cours
+            {t('success.backToCourses')}
           </Link>
         </div>
       </div>

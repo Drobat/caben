@@ -1,7 +1,12 @@
 // app/cancel/page.js
+'use client';
+
 import Link from 'next/link';
+import { useTranslation } from '@/app/i18n/hooks/useTranslation';
 
 export default function CancelPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-[#1f2937] text-white flex items-center justify-center">
       <div className="max-w-md mx-auto text-center px-4 py-8">
@@ -20,9 +25,9 @@ export default function CancelPage() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold mb-4">Payment Failed</h1>
+        <h1 className="text-3xl font-bold mb-4">{t('cancel.title')}</h1>
         <p className="text-gray-300 mb-8">
-          Sorry, your payment was not completed. Please try again or contact support if you need assistance.
+          {t('cancel.message')}
         </p>
         <div className="space-y-4">
           <Link 
@@ -41,7 +46,7 @@ export default function CancelPage() {
               mb-4
             "
           >
-            Try Again
+            {t('cancel.tryAgain')}
           </Link>
           <Link 
             href="mailto:support@example.com"
@@ -58,7 +63,7 @@ export default function CancelPage() {
               w-full
             "
           >
-            Contact Support
+            {t('cancel.contactSupport')}
           </Link>
         </div>
       </div>

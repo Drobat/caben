@@ -1,83 +1,61 @@
 // components/ui/UserMenu.js
+'use client';
+
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { useTranslation } from '@/app/i18n/hooks/useTranslation';
 
-/**
- * Composant qui gère l'affichage du menu utilisateur et l'état de connexion
- * @param {boolean} isMobile - Indique si le composant est affiché en version mobile
- * @param {Function} onItemClick - Fonction appelée lors du clic sur un élément du menu
- */
-export const UserMenu = ({ isMobile = false, onItemClick = () => {}, className = '', buttonClassName = '' }) => {
-  const { data: session, status } = useSession();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const baseClasses = `text-black ${isMobile ? 'block w-full' : 'text-xl'} hover:text-gray-700 ${buttonClassName}`;
+export const UserMenu = ({ isMobile = false, onItemClick = () => {} }) => {
+  const { data: session } = useSession();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { t } = useTranslation();
   
-  // Ferme le dropdown quand on clique en dehors
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
+  const baseClasses = `text-black ${isMobile ? 'block w-full text-center' : 'text-xl'} hover:text-gray-700`;
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Affichage pendant le chargement de la session
-  if (status === 'loading') {
-    return <span className={baseClasses}>Account</span>;
-  }
-
-  // Affichage pour un utilisateur non connecté
   if (!session) {
     return (
       <Link href="/account" onClick={onItemClick} className={baseClasses}>
-        Account
+        {t('nav.account')}
       </Link>
     );
   }
 
   if (isMobile) {
     return (
-      <div className={`${className}`}>
-        <Link href="/account" onClick={onItemClick} className={baseClasses}>
-          Hi, {session.user.name}!
-        </Link>
+      <div className="space-y-4 w-full text-center">
+        <div className={baseClasses}>
+          {t('nav.greeting')} {session.user.name}
+        </div>
         <button 
-          onClick={() => {
-            signOut();
-            onItemClick();
-          }} 
-          className={baseClasses}
+          onClick={() => signOut()} 
+          className={`${baseClasses} font-medium`}
         >
-          Sign Out
+          {t('auth.logout')}
         </button>
       </div>
     );
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative">
       <button
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className={`${baseClasses} flex items-center`}
+        onClick={() => setShowDropdown(!showDropdown)}
+        className={baseClasses}
       >
-        Hi, {session.user.name}!
+        {t('nav.greeting')} {session.user.name}
       </button>
       
-      {isDropdownOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+      {showDropdown && (
+        <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-50">
           <button
             onClick={() => {
               signOut();
-              setIsDropdownOpen(false);
+              setShowDropdown(false);
             }}
             className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            Sign Out
+            {t('auth.logout')}
           </button>
         </div>
       )}

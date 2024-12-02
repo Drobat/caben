@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { useTranslation } from '@/app/i18n/hooks/useTranslation';
 
 // Composant qui utilise useSearchParams
 function AccountForm() {
@@ -15,6 +16,7 @@ function AccountForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { data: session, status } = useSession();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -35,9 +37,7 @@ function AccountForm() {
       });
 
       if (result?.error) {
-        setError(`No account is associated with this email address. 
-To log in, please use the email address that was used to purchase your course. 
-If the issue persists, please contact our support team at contact@caben.com`);
+        setError(t('auth.error'));
         return;
       }
 
@@ -46,7 +46,7 @@ If the issue persists, please contact our support team at contact@caben.com`);
       }
     } catch (error) {
       console.error('Erreur de connexion:', error);
-      setError('Une erreur inattendue est survenue. Veuillez réessayer.');
+      setError(t('auth.error'));
     } finally {
       setLoading(false);
     }
@@ -54,17 +54,17 @@ If the issue persists, please contact our support team at contact@caben.com`);
 
   return (
     <div className="w-full max-w-md bg-white rounded-lg p-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-      Log in to my account
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-900">
+        {t('auth.title')}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label 
             htmlFor="email" 
-            className="block text-lg mb-2"
+            className="block text-lg mb-2 text-gray-900"
           >
-            Email
+            {t('auth.emailLabel')}
           </label>
           <input
             id="email"
@@ -73,7 +73,7 @@ If the issue persists, please contact our support team at contact@caben.com`);
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 bg-gray-100 border border-gray-300 rounded-md text-gray-900"
-            placeholder="your@email.com"
+            placeholder={t('auth.emailPlaceholder')}
           />
         </div>
 
@@ -88,7 +88,7 @@ If the issue persists, please contact our support team at contact@caben.com`);
           disabled={loading}
           className="w-full py-3 bg-[#F7CE3E] text-black rounded-md text-lg font-medium hover:bg-opacity-90 transition-all"
         >
-          {loading ? 'Envoi en cours...' : 'Recevoir le lien de connexion'}
+          {loading ? t('auth.loading') : t('auth.submitButton')}
         </button>
       </form>
     </div>
