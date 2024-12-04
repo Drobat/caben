@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getSession } from '@/lib/actions/getSession';
 import { useTranslation } from '@/app/i18n/hooks/useTranslation';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function SuccessContent() {
   const { t } = useTranslation();
@@ -13,18 +15,47 @@ export default function SuccessContent() {
   const sessionId = searchParams.get('session_id');
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchSession() {
       if (sessionId) {
         const details = await getSession(sessionId);
         setPaymentDetails(details);
+
+        if (details?.email && !session) {
+          try {
+            // Tentative de connexion automatique
+            const result = await signIn('email', {
+              email: details.email,
+              redirect: false,
+            });
+
+            if (result?.error) {
+              console.error('Erreur de connexion:', result.error);
+            }
+          } catch (error) {
+            console.error('Erreur lors de la connexion automatique:', error);
+          }
+        }
       }
       setLoading(false);
     }
 
     fetchSession();
-  }, [sessionId]);
+  }, [sessionId, session]);
+
+  // Redirection si déjà connecté
+  useEffect(() => {
+    if (session) {
+      const timer = setTimeout(() => {
+        router.push('/courses');
+      }, 5000); // Redirection après 5 secondes
+
+      return () => clearTimeout(timer);
+    }
+  }, [session, router]);
 
   if (loading) {
     return (
@@ -80,20 +111,28 @@ export default function SuccessContent() {
           {t('success.accessCreated')}
         </p>
 
+        {session && (
+          <p className="text-green-500 mt-4">
+            Vous êtes connecté ! Redirection automatique...
+          </p>
+        )}
+
         <div className="space-y-4">
           <Link
-            href="/account"
+            href={session ? "/courses" : "/account"}
             className="inline-block bg-[#F7CE3E] text-black px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-duration-300 w-full"
           >
-            {t('success.accessAccount')}
+            {session ? t('success.backToCourses') : t('success.accessAccount')}
           </Link>
 
-          <Link
-            href="/courses"
-            className="inline-block bg-gray-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-duration-300 w-full"
-          >
-            {t('success.backToCourses')}
-          </Link>
+          {!session && (
+            <Link
+              href="/courses"
+              className="inline-block bg-gray-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition-duration-300 w-full"
+            >
+              {t('success.backToCourses')}
+            </Link>
+          )}
         </div>
       </div>
     </div>
