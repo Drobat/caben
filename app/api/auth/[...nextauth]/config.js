@@ -8,5 +8,18 @@ export const authConfig = {
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60, // 30 jours
+    },
+    callbacks: {
+        async signIn({ user, email, account, profile, emailVerified }) {
+            if (email?.verificationRequest) {
+                return true;
+            }
+            
+            const existingUser = await prisma.user.findUnique({
+                where: { email: user.email }
+            });
+            
+            return !!existingUser;
+        }
     }
 }; 
