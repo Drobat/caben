@@ -51,6 +51,9 @@ export default function CourseCard({ product }) {
           <p className="text-gray-300 mb-6">
             {product.description}
           </p>
+          <p className="text-gray-300 mb-6">
+            Start Date: {product.startDate}
+          </p>
         </div>
 
         <div className="mt-auto">

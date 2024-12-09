@@ -6,14 +6,21 @@ export const dynamic = 'force-dynamic';
 
 export default async function CoursesPage() {
   try {
-    console.log('Fetching products...');
-    console.log('DATABASE_URL:', process.env.DATABASE_URL); // Pour vérifier l'URL en prod
+
     
     const products = await prisma.product.findMany({
       where: { active: true },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        duration: true,
+        imageUrl: true,
+        startDate: true,
+      },
     });
     
-    console.log('Products fetched:', products);
 
     return (
       <div className="container mx-auto px-4 py-8 bg-transparent">

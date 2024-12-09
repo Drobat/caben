@@ -41,7 +41,7 @@ export default function PurchasedProducts() {
                 className="bg-[#1f2937] rounded-lg p-6 shadow-lg text-white"
               >
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                
+                <p>{product.startDate}</p>
                 <p className="text-yellow-500">
                   Duration: {product.duration} hours
                 </p>
