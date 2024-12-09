@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authConfig } from '@/app/api/auth/[...nextauth]/config';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const session = await getServerSession(authConfig);
@@ -13,7 +15,7 @@ export async function GET() {
     const purchases = await prisma.order.findMany({
       where: {
         userId: session.user.id,
-        status: 'complete', // ou le statut que vous utilisez pour les paiements réussis
+        status: 'complete',
       },
       include: {
         product: true,
