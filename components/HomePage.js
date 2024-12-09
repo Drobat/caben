@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/app/i18n/hooks/useTranslation';
+import PurchasedProducts from './PurchasedProducts';
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -49,6 +50,7 @@ export default function HomePage() {
         >
           {t('home.startLearning')}
         </Link>
+        <PurchasedProducts />
       </div>
     </div>
   );
