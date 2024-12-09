@@ -15,7 +15,7 @@ export default function CourseCard({ product }) {
     try {
       setError('');
       setLoading(true);
-      const result = await createCheckoutSession(product.id);
+      const result = await createCheckoutSession(product);
       
       if (result?.url) {
         window.location.href = result.url;
