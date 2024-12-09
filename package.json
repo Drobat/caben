@@ -2,10 +2,15 @@
   "name": "your-project-name",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+
+
     "test-db": "node scripts/test-connection.js",
     "create-user": "node scripts/create-user.js",
     "list-users": "node scripts/list-users.js",
