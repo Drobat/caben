@@ -5,9 +5,9 @@ async function addProduct() {
   try {
     const product = await prisma.product.create({
       data: {
-        name: "✨ Business English Course - Premium Edition",
-        description: "Professional Business English Program • Business Communication Excellence • Leadership Skills • Writing Mastery • Live Sessions • Personal Coach • Mobile App • Business Certificate • Global Network",
-        price: 29900, // 299.00 EUR
+        name: "✨ test",
+        description: "hehehehheess Communication Excellence • Leadership Skills • Writing Mastery • Live Sessions • Personal Coach • Mobile App • Business Certificate • Global Network",
+        price: 300, // 299.00 EUR
         duration: 250, // 250 heures
         imageUrl: "/test.svg",
         startDate: "2024-02-01", // Format string YYYY-MM-DD

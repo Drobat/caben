@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Button } from './ui/Button';
 import { createCheckoutSession } from '@/lib/actions/payment';
 
-export default function CourseCard() {
+export default function CourseCard({ product }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -13,7 +13,7 @@ export default function CourseCard() {
     try {
       setError('');
       setLoading(true);
-      const result = await createCheckoutSession();
+      const result = await createCheckoutSession(product.id);
       
       if (result?.url) {
         window.location.href = result.url;
@@ -23,41 +23,48 @@ export default function CourseCard() {
     } catch (error) {
       console.error('Payment error:', error);
       setError(error.message || 'Une erreur est survenue. Veuillez réessayer.');
+    } finally {
       setLoading(false);
     }
   };
 
+  if (!product) return null;
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-[#1f2937] text-white">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-[#1f2937] text-white h-full flex flex-col">
       <div className="relative h-48">
         <Image
-          src="/test.svg"
-          alt="Business English Course"
+          src={product.imageUrl || "/test.svg"}
+          alt={product.name}
           width={700}
           height={400}
           className="w-full h-full"
           priority
         />
       </div>
-      <div className="px-6 py-4">
-        <div className="text-yellow-500 font-bold text-xl mb-4">250 HOURS</div>
-        <h2 className="font-bold text-3xl mb-4">Business English</h2>
-        <p className="text-gray-300 mb-6">
-          Welcome to our courses in Business English. Here we offer you a range of premier English programs on everything from nursing to engineering to aviation. Whether your team requires test-preparation courses or those in...
-        </p>
+      <div className="px-6 py-4 flex-1 flex flex-col">
+        <div>
+          <div className="text-yellow-500 font-bold text-xl mb-4">{product.duration} HOURS</div>
+          <h2 className="font-bold text-3xl mb-4">{product.name}</h2>
+          <p className="text-gray-300 mb-6">
+            {product.description}
+          </p>
+        </div>
 
-        {error && (
-          <div className="bg-red-500 text-white p-3 rounded-lg mb-4 text-sm">
-            {error}
-          </div>
-        )}
+        <div className="mt-auto">
+          {error && (
+            <div className="bg-red-500 text-white p-3 rounded-lg mb-4 text-sm">
+              {error}
+            </div>
+          )}
 
-        <Button
-          onClick={handleEnrollClick}
-          loading={loading}
-        >
-          {loading ? 'Processing...' : 'ENROLL NOW'}
-        </Button>
+          <Button
+            onClick={handleEnrollClick}
+            loading={loading}
+          >
+            {loading ? 'Processing...' : `ENROLL NOW - €${(product.price / 100).toFixed(2)}`}
+          </Button>
+        </div>
       </div>
     </div>
   );
