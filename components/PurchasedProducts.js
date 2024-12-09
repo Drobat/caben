@@ -25,7 +25,6 @@ export default function PurchasedProducts() {
     fetchPurchasedProducts();
   }, [session]);
 
-  // Ne rien afficher s'il n'y a pas de session ou pas de produits
   if (!session || !isLoading && purchasedProducts.length === 0) {
     return null;
   }
@@ -34,9 +33,7 @@ export default function PurchasedProducts() {
     <div className="w-full max-w-4xl mx-auto mt-8 px-4">
       {purchasedProducts.length > 0 && (
         <>
-          <h2 className="text-2xl font-bold mb-6 text-center text-white">
-            Your Purchased Courses
-          </h2>
+         
           <div className="space-y-4">
             {purchasedProducts.map((product) => (
               <div 
@@ -44,7 +41,7 @@ export default function PurchasedProducts() {
                 className="bg-[#1f2937] rounded-lg p-6 shadow-lg text-white"
               >
                 <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-300 mb-2">{product.description}</p>
+                
                 <p className="text-yellow-500">
                   Duration: {product.duration} hours
                 </p>
