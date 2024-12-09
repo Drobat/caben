@@ -6,6 +6,8 @@ import { Button } from './ui/Button';
 import { createCheckoutSession } from '@/lib/actions/payment';
 
 export default function CourseCard({ product }) {
+  console.log('Product data:', product);
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
