@@ -5,6 +5,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
 import { authConfig } from './config';
 import { Resend } from 'resend';
+import { createVerificationEmailHTML } from './email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -28,22 +29,7 @@ const handler = NextAuth({
                         from: process.env.EMAIL_FROM,
                         to: email,
                         subject: 'Connexion à CABEN',
-                        html: `
-                            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                                <h1>Connexion à CABEN</h1>
-                                <p>Cliquez sur le lien ci-dessous pour vous connecter :</p>
-                                <a href="${url}" style="
-                                    display: inline-block;
-                                    padding: 12px 24px;
-                                    background-color: #F7CE3E;
-                                    color: black;
-                                    text-decoration: none;
-                                    border-radius: 5px;
-                                    margin: 20px 0;
-                                ">Se connecter</a>
-                                <p>Si vous n'avez pas demandé cette connexion, vous pouvez ignorer cet email.</p>
-                            </div>
-                        `
+                        html: createVerificationEmailHTML(url)
                     });
 
                     if (error) {

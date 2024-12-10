@@ -8,13 +8,22 @@ export async function GET() {
   try {
     const session = await getServerSession(authConfig);
     
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return Response.json({ error: 'Non autorisé' }, { status: 401 });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+      select: { id: true }
+    });
+
+    if (!user) {
+      return Response.json({ error: 'Utilisateur non trouvé' }, { status: 404 });
     }
 
     const purchases = await prisma.order.findMany({
       where: {
-        userId: session.user.id,
+        userId: user.id,
         status: 'complete',
       },
       include: {
