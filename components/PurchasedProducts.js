@@ -39,7 +39,6 @@ export default function PurchasedProducts() {
   }, [session, status]);
 
   const handleStartLearning = () => {
-    // Redirection vers Zoom
     window.open('https://zoom.us/j/your-meeting-id', '_blank');
   };
 
@@ -53,7 +52,7 @@ export default function PurchasedProducts() {
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 px-4 flex flex-col items-center">
-      {purchasedProducts.length > 0 && (
+      {purchasedProducts.length > 0 ? (
         <div className="space-y-4 w-full max-w-md">
           {purchasedProducts.map((product) => (
             <div 
@@ -61,19 +60,23 @@ export default function PurchasedProducts() {
               className="bg-[#1f2937] rounded-lg p-6 shadow-lg text-white hover:bg-[#2d3748] transition-colors duration-300"
             >
               <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-              <p className="text-gray-300">{product.startDate}</p>
+              <p className="text-gray-300">
+                {t('purchasedProducts.startDate')}: {product.startDate}
+              </p>
               <p className="text-yellow-500 mt-2">
-                Duration: {product.duration} hours
+                {t('purchasedProducts.duration')}: {product.duration} {t('purchasedProducts.hours')}
               </p>
               <button
                 onClick={handleStartLearning}
                 className="mt-4 w-full bg-[#F7CE3E] text-black py-2 px-4 rounded-md hover:bg-opacity-90 transition-all font-medium"
               >
-                START LEARNING
+                {t('purchasedProducts.startLearning')}
               </button>
             </div>
           ))}
         </div>
+      ) : (
+        <p className="text-gray-500">{t('purchasedProducts.noProducts')}</p>
       )}
     </div>
   );

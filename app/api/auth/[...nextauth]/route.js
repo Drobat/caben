@@ -28,7 +28,7 @@ const handler = NextAuth({
                     const { data, error } = await resend.emails.send({
                         from: process.env.EMAIL_FROM,
                         to: email,
-                        subject: 'Connexion à CABEN',
+                        subject: 'Login to CABEN',
                         html: createVerificationEmailHTML(url)
                     });
 

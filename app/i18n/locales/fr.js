@@ -40,5 +40,12 @@ export const fr = {
     message: "Désolé, votre paiement n'a pas été effectué. Veuillez réessayer ou contacter le support si vous avez besoin d'aide.",
     tryAgain: "Réessayer",
     contactSupport: "Contacter le support"
+  },
+  purchasedProducts: {
+    duration: "Durée",
+    hours: "heures",
+    startDate: "Date de début",
+    startLearning: "COMMENCER LE COURS",
+    noProducts: "Aucun cours acheté"
   }
 }; 
