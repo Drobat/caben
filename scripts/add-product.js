@@ -19,8 +19,8 @@ async function addProduct() {
       data: {
         name: "Nicolas",
         description: "hehehehheess Communication Excellence • Leadership Skills • Writing Mastery • Live Sessions • Personal Coach • Mobile App • Business Certificate • Global Network",
-        price: 6000, // 299.00 EUR
-        duration: 12, // 250 heures
+        price: 6000, 
+        duration: 12, 
         imageUrl: "/test.svg",
         startDate: "2024-02-01", // Format string YYYY-MM-DD
         endDate: "2024-12-31",   // Format string YYYY-MM-DD

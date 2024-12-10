@@ -13,7 +13,7 @@ export default function HomePage() {
       className="home-page h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/bg.jpg')" }}
     >
-      <div className="flex flex-col justify-start items-center h-full">
+      <div className="flex flex-col justify-start items-center h-full pb-12 overflow-y-auto">
         <Image
           src="/logo-owl.jpeg"
           alt="Logo Owl"
