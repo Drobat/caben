@@ -1,3 +1,5 @@
+import { prisma } from '@/lib/prisma';
+
 // Configuration de base pour NextAuth
 export const authConfig = {
     pages: {
