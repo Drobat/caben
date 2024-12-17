@@ -24,7 +24,7 @@ export default function AboutPage() {
           <section className="bg-[#2d3748] p-8 rounded-lg shadow-xl">
             <p className="text-lg leading-relaxed mb-6">
               Students join live classes with certified teachers, all of whom hold 
-              master's degrees in ESL/EFL and have extensive teaching experience. 
+              master&apos;s degrees in ESL/EFL and have extensive teaching experience. 
               They engage in dynamic lessons using Zoom, AI-driven tools, and learning 
               management systems. This approach provides personalized, efficient learning 
               experiences that go beyond traditional methods.
@@ -33,9 +33,9 @@ export default function AboutPage() {
 
           <section className="bg-[#2d3748] p-8 rounded-lg shadow-xl">
             <p className="text-lg leading-relaxed">
-              CABEN's courses fit any schedule, from short workshops to in-depth programs, 
+              CABEN&apos;s courses fit any schedule, from short workshops to in-depth programs, 
               with certificates marking progress. Our belief is simple: learning should be 
-              accessible, interactive, and adaptable. Whether it's IELTS preparation, 
+              accessible, interactive, and adaptable. Whether it&apos;s IELTS preparation, 
               business communication, or academic writing, CABEN is here to support your 
               journey to success.
             </p>
