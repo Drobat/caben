@@ -145,8 +145,8 @@ function AccountForm() {
           Anything Else?
         </h2>
         <p className="text-gray-300 mb-6">
-          We're always looking for ways to improve your experience. If there's something 
-          you'd like to see added to your account, let us know!
+          We&apos;re always looking for ways to improve your experience. If there&apos;s something 
+          you&apos;d like to see added to your account, let us know!
         </p>
         <a 
           href="mailto:contact@caben.com"
