@@ -17,9 +17,9 @@ async function addProduct() {
   try {
     const product = await prisma.product.create({
       data: {
-        name: "Nicolas",
-        description: "hehehehheess Communication Excellence • Leadership Skills • Writing Mastery • Live Sessions • Personal Coach • Mobile App • Business Certificate • Global Network",
-        price: 6000, 
+        name: "Academic Writing in English, Advanced",
+        description: "(7:30 - 8:30 pm, Monday, Wednesday, Friday",
+        price: 12000, 
         duration: 12, 
         imageUrl: "/test.svg",
         startDate: "2024-02-01", // Format string YYYY-MM-DD
