@@ -15,7 +15,7 @@ export default function HomePage() {
     >
       <div className="flex flex-col justify-start items-center h-full pb-12 overflow-y-auto">
         <Image
-          src="/logo-owl.jpeg"
+          src="/logo-owl.png"
           alt="Logo Owl"
           width={500}
           height={500}
