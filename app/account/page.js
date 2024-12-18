@@ -64,42 +64,7 @@ function AccountForm() {
           you need to succeed in your Academic and Business English journey.
         </p>
       </div>
-
-      {/* Features Grid avec effets hover */}
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
-          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
-            View Your Schedule
-          </h2>
-          <p className="text-gray-300">
-            Stay on top of your classes with an easy-to-access schedule that keeps 
-            you informed about upcoming lessons and important dates.
-          </p>
-        </div>
-
-        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
-          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
-            Access Your Billing Information
-          </h2>
-          <p className="text-gray-300">
-            View payment details, download receipts, and track your payment history 
-            for complete transparency.
-          </p>
-        </div>
-
-        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
-          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
-            Explore the Resource Center
-          </h2>
-          <p className="text-gray-300">
-            Get access to exclusive learning materials, study guides, and other 
-            valuable resources to help you master your course content.
-          </p>
-        </div>
-      </div>
-
-      {/* Login Form */}
-      <div className="bg-[#2d3748] rounded-lg p-8 text-white">
+      <div className="bg-[#2d3748] rounded-lg p-8 mb-8 text-white">
         <h2 className="text-2xl font-bold mb-8 text-[#F7CE3E] text-center">
           {t('auth.title')}
         </h2>
@@ -138,8 +103,43 @@ function AccountForm() {
           </button>
         </form>
       </div>
+      {/* Features Grid avec effets hover */}
+      <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
+          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
+            View Your Schedule
+          </h2>
+          <p className="text-gray-300">
+            Stay on top of your classes with an easy-to-access schedule that keeps 
+            you informed about upcoming lessons and important dates.
+          </p>
+        </div>
 
-      {/* Nouvelle section "Anything Else?" */}
+        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
+          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
+            Access Your Billing Information
+          </h2>
+          <p className="text-gray-300">
+            View payment details, download receipts, and track your payment history 
+            for complete transparency.
+          </p>
+        </div>
+
+        <div className="bg-[#2d3748] rounded-lg p-6 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#374151] cursor-pointer">
+          <h2 className="text-xl font-semibold mb-3 text-[#F7CE3E]">
+            Explore the Resource Center
+          </h2>
+          <p className="text-gray-300">
+            Get access to exclusive learning materials, study guides, and other 
+            valuable resources to help you master your course content.
+          </p>
+        </div>
+      </div>
+
+      {/* Login Form */}
+  
+
+     
       <div className="bg-[#2d3748] rounded-lg p-8 text-white text-center">
         <h2 className="text-2xl font-bold mb-4 text-[#F7CE3E]">
           Anything Else?
